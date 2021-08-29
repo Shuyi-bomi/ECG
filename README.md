@@ -43,8 +43,14 @@ To improve the robustness of the classification task, we created an ensemble of 
 
 
 ## Result:
+
 1: From the result on training dataset, we could see after threshold optimization the validation dataset actually obtained the excellent performance: We calculate binary f1 score for each class and obtained f1 scores >=0.79 for all classes. (Refer to ‘score.json’ to check details). For the test dataset, we obtain weighted f1 = 0.64. (Refer to ‘scoretest.json’ to check details). So I believe threshold optimization works and we need to choose proper criterion to obtain threshold in the future.
+
 2: From the roc curve and auc value, I do believe our model learns from the dataset. Whereas the data imbalance problem is extremely serious for many minority classes and the lowest positive rate could be 0.0073. So model is hard to assign high probability for some classes, which makes false negative number high. 
+<p align="middle">
+  <img src="https://github.com/Shuyi-bomi/ECG/blob/master/result/multilabel_roc_072114.png" width="600" />
+</p>
+
 3: I tried random oversampling by adding noise of the existing samples for the minority class but this didn’t work from the result. But I still believe this is necessary in this scenario and we should try more rigorous data resampling method. 
 
 
