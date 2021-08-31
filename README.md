@@ -19,10 +19,15 @@ We designed an improved ResNet to assign the 12-lead ECG recordings into the 27 
 
 #### Loss function:
 (Refer to code ‘modelbuild.py’ )
+
 1: Binary cross entropy for each class and take the mean, in order to deal with data imbalance problem, when we train the model using Keras, we set pre-specified different weight for 27 classes:
+
 Pre-specified weight_i = # of samples which belongs to class j/# of samples which belongs to class I
+
 Class j is the class that has most samples
+
 2: Focal loss(parameter alpha and beta which to be tuned)
+
 3: Weighted Binary cross entropy(assign weight by ourselves)
 
 #### Optimizer:
@@ -34,10 +39,12 @@ We adopt data resampling to deal with data imbalance issue. In detail, we aim to
 
 ### Post-processing (Threshold optimization):
 (Refer to code ‘postprocessing.py’,’threshold.py’)
+
 After we obtain the model and predict on the test dataset, we will obtain probability from 0 to 1. Afterwards, we didn’t adopt the usual threshold 0.5 to decide if the sample belongs to that class or not. Instead, we learn the threshold for each class from the validation dataset and apply to the test dataset. This is proved to be useful when dealing with imbalance issue and for neural network model. 
 
 ### Ensemble Learning:
 (Refer to code ‘model_training.py’ and previous procedure splitting data into 5 groups, each includes one training and one validation dataset) 
+
 To improve the robustness of the classification task, we created an ensemble of five neural network models trained via five-fold cross validation. The threshold of each model was optimized by its split validation set, and ECGs were classified according to the majority vote.
 
 
